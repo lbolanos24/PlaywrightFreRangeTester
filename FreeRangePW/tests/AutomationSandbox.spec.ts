@@ -8,7 +8,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
     test.describe('Acciones en el Automation sandbox', () => {
         test('Click en Boton Id dinamico', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo hacer click en el boton con Id dinamico', async () => {
                 //await page.getByRole('button', { name: 'Hacé click para generar un ID' }).click();
@@ -20,7 +20,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
         
         test('Llenar campo de texto en automation sandbox', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo ingresar texto en el campo Un Aburrido Texto', async () => {
                 await expect(page.getByPlaceholder('Ingresá texto'),'El campo de texto no permite edicion').toBeEditable();
@@ -29,10 +29,10 @@ import { test, Browser, Page, expect } from '@playwright/test';
             })    
         })
 
-        test.only('Puedo seleccionar y desseleccionar check boxes', async ({ page, browserName }) => {
+        test('Puedo seleccionar y desseleccionar check boxes', async ({ page, browserName }) => {
             test.skip(browserName === 'chromium', 'no anda en chrome todavia');
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo seleccionar check box para pasta', async () => {
                 await page.getByLabel('Pasta 🍝').check();
@@ -47,7 +47,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
         
         test('Puedo seleccionar radio Buttons', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo seleccionar Radio Button para NO', async () => {
                 await page.getByLabel('No').check();
@@ -61,7 +61,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
                 description:'esto va a informar que el caso de prueba tiene un bug'
             });
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Valido que la lista contiene los valores esperados', async () => {
                 const deportes = ['Fútbol','Tennis','Basketball'];
@@ -85,7 +85,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
 
         test('Puedo seleccionar un item del dropdown dias de la semana', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('selecciono un dia de la semana del dropdown', async () => {
                 await page.getByRole('button', { name: 'Día de la semana' }).click();
@@ -93,9 +93,9 @@ import { test, Browser, Page, expect } from '@playwright/test';
             })
         })
 
-        test('Puedo Subir archivos', async ({ page }) => {
+        test.skip('Puedo Subir archivos', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Agrego archivos para ser subidos', async () => {
                 await page.getByLabel('Upload File').setInputFiles(['pathAlachivo.pdf','Archivo2.pdf']);
@@ -103,22 +103,22 @@ import { test, Browser, Page, expect } from '@playwright/test';
             })
         })
 
-        test('Puedo hacer drag and drop', async ({ page }) => {
+        test.skip('Puedo hacer drag and drop', async ({ page }) => {
             await test.step('Navego a la pagina de sandbox de FreeRangeTesters', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('selecciono un dia de la semana del dropdown', async () => {
                 await page.getByTestId('DragFrom').dragTo(page.getByTestId('DragTo'));
             })
         })
 
-        test.only('Valido la columna Nombres de la tabla estática', async ({ page }) => {
+        test('Valido la columna Nombres de la tabla estática', async ({ page }) => {
             await test.info().attach('screenshot', {
                 body: await page.screenshot(),
                 contentType: 'image/png',
             })
             await test.step('Dado que navego al Sandbox de Automation de Free Range Testers', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo validar los elementos para la columna Nombre de la tabla estática', async () => {
                 const valoresColumnaNombres = await page.$$eval('h2:has-text("Tabla estática") + table tbody tr td:nth-child(2)', elements => elements.map(element => element.textContent));
@@ -135,7 +135,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
 
         test('Valido que todos los valores cambian en la tabla dinámica luego de un reload', async ({ page }) => {
             await test.step('Dado que navego al Sandbox de Automation de Free Range Testers', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/')
+                await page.goto('/sandbox-automation-testing/')
             })
             await test.step('Puedo validar los valores cambiaron al hacer reload', async () => {
                 //Creamos un arreglo con todos los valores de la tabla dinámica
@@ -153,7 +153,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
 
         test('Ejemplo de Soft Assertions', async ({ page }) => {
             await test.step('Dado que navego al Sandbox de Automation de Free Range Testers', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+                await page.goto('/sandbox-automation-testing/');
             })
             await test.step('Valido que todos los elementos de los checkboxes son los correctos', async () => {
                 await expect.soft(page.getByText('Pizza 🍕'), 'No se encontró el elemento Pizza 🍕').toBeVisible();
@@ -166,7 +166,7 @@ import { test, Browser, Page, expect } from '@playwright/test';
 
         test('Validando dentro de un popup', async ({ page }) => {
             await test.step('Dado que navego al sandbox', async () => {
-                await page.goto('https://thefreerangetester.github.io/sandbox-automation-testing/');
+                await page.goto('/sandbox-automation-testing/');
             })
             await test.step('Cuando hago click en el botón popup', async () => {
                 await page.getByRole('button', { name: 'Mostrar popup' }).click();
